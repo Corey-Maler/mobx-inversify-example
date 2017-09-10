@@ -6,9 +6,9 @@ export class Node extends React.Component<{}, {}> {
     public render() {
         return (
         <div>
-            <div className="row">
-                <div className="title">{this.props.node.title} <button onClick={() => this.props.node.collapsed = !this.props.node.collapsed}>show/hide</button></div>
-                <div className="desc">43</div>
+            <div className="row" onClick={() => this.props.node.collapsed = !this.props.node.collapsed}>
+                <div className="title">{this.props.node.title} {this.props.node.childs && <span className="label">show/hide</span>}</div>
+                <div className="desc">{this.props.node.a}</div>
             </div>
             <div className="childs">
             {
