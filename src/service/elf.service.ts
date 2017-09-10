@@ -15,7 +15,7 @@ export class ElfService {
     @inject(ElfState) public elfState: ElfState;
 
     @action.bound public async fetch() {
-        const raw = await this.http.Get('/elf');
+        const raw = <any>(await this.http.Get('/elf'));
         this.elfState.filename = 'filename.elm';
         this.elfState.tree = raw.map(r => new Node(r));
     }

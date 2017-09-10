@@ -8,7 +8,7 @@ import { ElfService } from '../../service/elf.service';
 import { ElfState } from '../../state/elf.state';
 
 // components
-import { Node } from '../node';
+import { TreeNode } from '../node';
 
 @observer
 export class Tree extends React.Component<{}, {}> {
@@ -27,7 +27,7 @@ export class Tree extends React.Component<{}, {}> {
         }
 
         return (<div className="table">
-            {this.elfState.tree.map(t => <Node key={t.id} node={t} />)}
+            {this.elfState.tree.map(t => <TreeNode key={t.id} node={t} />)}
         </div>);
     }
 }

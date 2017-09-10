@@ -1,8 +1,14 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 
+import { Node } from '../../models/node';
+
+interface NodeProps {
+    node: Node;
+}
+
 @observer
-export class Node extends React.Component<{}, {}> {
+export class TreeNode extends React.Component<NodeProps, {}> {
     public render() {
         return (
         <div>
@@ -12,7 +18,7 @@ export class Node extends React.Component<{}, {}> {
             </div>
             <div className="childs">
             {
-                (!this.props.node.collapsed) && this.props.node.childs && this.props.node.childs.map((a) => <Node key={a.id} node={a}></Node>)
+                (!this.props.node.collapsed) && this.props.node.childs && this.props.node.childs.map((a) => <TreeNode key={a.id} node={a}></TreeNode>)
             }
             </div>
         </div>
