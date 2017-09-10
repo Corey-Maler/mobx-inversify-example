@@ -7,11 +7,13 @@ import { HTTP } from '../utils/http';
 import { Node } from '../models/node';
 import { ElfState } from '../state/elf.state';
 
-function TreeWalk(node: Node, cb: (n: Node) => void) {
-    cb(node);
-    if (node.childs) {
-        node.childs.forEach(n => TreeWalk(n, cb));
+const parseData = (raw: any) => {
+    let childs = undefined;
+    if (raw.childs) {
+        childs = raw.childs.map(parseData);
     }
+
+    return new Node(raw.title, {}, childs);
 }
 
 @provideSingleton(ElfService)
@@ -22,31 +24,15 @@ export class ElfService {
     @action.bound public async fetch() {
         const raw = <any>(await this.http.Get('/elf'));
         this.elfState.filename = 'filename.elm';
-        this.elfState.tree = raw.map(r => new Node(r));
+        this.elfState.sections = raw.map(parseData);
+        this.elfState.symbols = raw.map(parseData);
     }
 
-    @action.bound public filterByTitle(filterStr: string) {
-        const lowerFilterStr = filterStr.toLowerCase();
-        this.elfState.ui.filter = filterStr;
-        if (this.elfState.tree !== 'LOADING') {
-            if (filterStr !== '') {
-                const check = (node: Node) => {
-                    node.hidden = true;
-                    if (node.title.toLowerCase().includes(lowerFilterStr)) {
-                        let parent = node;
-                        while (parent) {
-                            parent.hidden = false;
-                            parent.collapsed = false;
-                            parent = parent.parent;
-                        }
-                    }
-                }
+    @action.bound public changeSectionFilter(filter: string) {
+        this.elfState.ui.sectionFilter = filter;
+    }
 
-                this.elfState.tree.forEach(node => TreeWalk(node, check));
-            } else {
-                this.elfState.tree.forEach(node => TreeWalk(node, (n) => { n.hidden= false }));
-            }
-        }
-        console.log('state', this.elfState);
+    @action.bound public changeSymbolFilter(filter: string) {
+        this.elfState.ui.symbolFilter = filter;
     }
 }

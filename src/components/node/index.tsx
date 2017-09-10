@@ -22,7 +22,7 @@ export class TreeNode extends React.Component<NodeProps, {}> {
         <div style={{display: (node.hidden ? 'hidden' : 'block')}}>
             <div className="row" onClick={() => node.collapsed = !node.collapsed}>
                 <div className="title">{this.props.node.title} {node.childs && <span className="label">show/hide</span>}</div>
-                <div className="desc">{this.props.node.a}</div>
+                <div className="desc">4</div>
             </div>
             <div className="childs">
             {

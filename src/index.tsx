@@ -3,16 +3,12 @@ import * as ReactDOM from 'react-dom';
 
 import { AppContainer } from './ioc';
 
-import { Tree } from './components/tree';
-import { Header } from './components/header';
-import { TreeFilter } from './components/filter';
+import { Page } from './components/page';
 
 class App extends React.Component<{}, {}> {
     public render() {
         return (<div className="app-root">
-            <Header />
-            <TreeFilter />
-            <Tree />
+            <Page />
         </div>);
     }
 }

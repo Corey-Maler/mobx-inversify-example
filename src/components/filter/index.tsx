@@ -4,17 +4,20 @@ import { inject } from '../../ioc';
 
 import { ElfService } from '../../service/elf.service';
 
-export class TreeFilter extends React.Component<{}, {}> {
-    @inject(ElfService) private elfService: ElfService;
+interface TreeFilterProps {
+    filter: string;
+    onChange: (filter: string) => void;
+}
 
+export class TreeFilter extends React.Component<TreeFilterProps, {}> {
     private onChange = (e: React.FormEvent<HTMLInputElement>) => {
-        this.elfService.filterByTitle(e.currentTarget.value);
+        this.props.onChange(e.currentTarget.value);
     }
 
     public render() {
         return (<div className="filter">
             <span>Filter by title:</span>
-            <input onChange={this.onChange}/>
+            <input onChange={this.onChange} value={this.props.filter} />
         </div>);
     }
 }
