@@ -4,6 +4,7 @@
         "jsx": "react",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "moduleResolution": "node",
         "lib": [
             "dom",
             "es6",
