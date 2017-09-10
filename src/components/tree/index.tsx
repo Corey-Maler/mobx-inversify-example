@@ -13,6 +13,7 @@ import { Node } from '../../models/node';
 interface TableProps<DATA> {
     tree: Node<DATA>[] | 'LOADING';
     node: ({node}: {node: Node<DATA>}) => JSX.Element;
+    limited: boolean;
 }
 
 @observer
@@ -27,6 +28,7 @@ export class Tree<DATA> extends React.Component<TableProps<DATA>, {}> {
 
         return (<div className="table">
             {this.props.tree.map(t => <this.props.node key={t.id} node={t} />)}
+            {this.props.limited && <div className="limitation">Too much data to display. Try to filter by section or name.</div>}
         </div>);
     }
 }

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import { Tree } from '../tree';
 import { TreeFilter } from '../filter';
 
-import { Node, FilterTree } from '../../models/node';
+import { Node, FilterTree, LimitTree } from '../../models/node';
 
 interface PanelProps<DATA> {
     tree: Node<DATA>[] | 'LOADING';
@@ -23,12 +23,20 @@ export class Panel<DATA> extends React.Component<PanelProps<DATA>, {}> {
             return node.title.toLowerCase().includes(filter);
         })) as Node<DATA>[];
 
+        let limitedTree: Node<DATA>[] | 'LOADING' = 'LOADING';
+        let limited = false;
+        if  (filteredTree !== 'LOADING') {
+            const limits = LimitTree(filteredTree);
+            limitedTree = limits.data;
+            limited = limits.limited;
+        }
+
         return (<div className="panel">
             <div className="table-head">
                 <TreeFilter filter={filter} onChange={changeFilter} />
                 <div className="table-title">{title}</div>
             </div>
-            <Tree node={this.props.node} tree={filteredTree}/>
+            <Tree node={this.props.node} tree={limitedTree} limited={limited}/>
         </div>)
     }
 }
