@@ -10,6 +10,7 @@ export class ElfUI {
     @observable sectionFilter: string = '';
     @observable symbolFilter: string = '';
     @observable public selectedSection: string | undefined;
+    @observable public filterBySection: string | undefined;
 }
 
 @provideSingleton(ElfState)

@@ -3,10 +3,6 @@ import { observer } from 'mobx-react';
 
 import { inject, provideSingleton } from '../../ioc';
 
-// state and services
-import { ElfService } from '../../service/elf.service';
-import { ElfState } from '../../state/elf.state';
-
 // components
 import { Node } from '../../models/node';
 

@@ -66,4 +66,9 @@ export class ElfService {
     @action.bound public highlightSection(section: string) {
         this.elfState.ui.selectedSection = section;
     }
+
+    @action.bound public setFilterBySection(section: string) {
+        console.log('>>', section);
+        this.elfState.ui.filterBySection = section;
+    }
 }

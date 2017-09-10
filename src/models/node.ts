@@ -8,9 +8,9 @@ interface Iter {
     iteration: number;
 }
 
-type Predicate = <DATA>(n: Node<DATA>) => boolean;
+type Predicate<DATA> = (n: Node<DATA>) => boolean;
 
-function checkSelfOrChild<DATA>(node: Node<DATA>, predicate: Predicate) {
+function checkSelfOrChild<DATA>(node: Node<DATA>, predicate: Predicate<DATA>) {
     let childs = [];
     if (node.childs) {
         childs = node.childs.map(n => checkSelfOrChild(n, predicate)).filter(n => n !== undefined);
@@ -40,7 +40,7 @@ function limitSelfOrChild<DATA>(node: Node<DATA>, _iteration: Iter) {
     return new Node(node.title, node.data, childs.length > 0 ? childs : undefined, node.id, node.parent);
 }
 
-export function FilterTree<DATA>(nodes: Node<DATA>[], predicate: Predicate) {
+export function FilterTree<DATA>(nodes: Node<DATA>[], predicate: Predicate<DATA>) {
     const res = nodes.map(n => checkSelfOrChild(n, predicate)).filter(t => t !== undefined);
     return res;
 }

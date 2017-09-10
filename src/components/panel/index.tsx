@@ -12,6 +12,7 @@ interface PanelProps<DATA> {
     filter: string;
     changeFilter: (filter: string) => void;
     node: ({node}: {node: Node<DATA>}) => JSX.Element;
+    additionalFilter?: JSX.Element;
 }
 
 @observer
@@ -34,8 +35,10 @@ export class Panel<DATA> extends React.Component<PanelProps<DATA>, {}> {
         return (<div className="panel">
             <div className="table-head">
                 <TreeFilter filter={filter} onChange={changeFilter} />
+                { this.props.additionalFilter }
                 <div className="table-title">{title}</div>
             </div>
+            
             <Tree node={this.props.node} tree={limitedTree} limited={limited}/>
         </div>)
     }

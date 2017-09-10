@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
 import { inject } from '../../ioc';
 
@@ -9,6 +10,7 @@ interface TreeFilterProps {
     onChange: (filter: string) => void;
 }
 
+@observer
 export class TreeFilter extends React.Component<TreeFilterProps, {}> {
     private onChange = (e: React.FormEvent<HTMLInputElement>) => {
         this.props.onChange(e.currentTarget.value);
