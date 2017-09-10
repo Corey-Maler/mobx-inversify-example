@@ -8,7 +8,7 @@ import { ISymbol } from '../../models/symbol';
 export const SymbolNode = ({node}: {node: Node<ISymbol>}) => {
     return (
         <div>
-            <div className="row">
+            <div className="row" data-section={node.data.section}>
                 <div className="title">{node.title} {node.childs && <span className="label">scope</span>}</div>
                 <div className="desc">{node.data.symboltype}</div>
             </div>

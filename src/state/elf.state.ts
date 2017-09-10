@@ -9,6 +9,7 @@ import { ISymbol } from '../models/symbol';
 export class ElfUI {
     @observable sectionFilter: string = '';
     @observable symbolFilter: string = '';
+    @observable public selectedSection: string | undefined;
 }
 
 @provideSingleton(ElfState)
