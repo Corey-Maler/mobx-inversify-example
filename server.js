@@ -12,11 +12,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
     stats: {colors: true},
 }));
 
-app.use(require('webpack-hot-middleware')(compiler, {
-    log: console.log
-}))
 
-app.use('/static', express.static('static'));
+app.use('/api', function(req, res) {
+    res.header("Content-Type",'application/json');
+    res.sendFile(path.join(__dirname, './api/elf.json'));  
+});
 
 app.listen(8888, () => {
     console.log('start listen on 8888')
