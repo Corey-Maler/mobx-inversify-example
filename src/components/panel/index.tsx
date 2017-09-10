@@ -18,14 +18,8 @@ interface PanelProps<DATA> {
 export class Panel<DATA> extends React.Component<PanelProps<DATA>, {}> {
     public render() {
         const { changeFilter, filter, tree, title } = this.props;
-        if (tree === 'LOADING') {
-            return (<div className="panel">
-                <div className="table">
-                <h1 className="loading">Loading</h1>
-            </div></div>);
-        }
 
-        const filteredTree = (filter === '' ? tree : FilterTree(tree, (node) => {
+        const filteredTree = tree === 'LOADING' ? 'LOADING' : (filter === '' ? tree : FilterTree(tree, (node) => {
             return node.title.toLowerCase().includes(filter);
         })) as Node<DATA>[];
 

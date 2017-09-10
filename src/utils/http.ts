@@ -1,5 +1,6 @@
 import { provideSingleton } from '../ioc';
 
+/*
 const mockAnswer =  [
     {
         title: 'a1',
@@ -77,10 +78,11 @@ const mockAnswer =  [
         }]
     }
 ];
+*/
 
 @provideSingleton(HTTP)
 export class HTTP {
     public Get(resource) {
-        return new Promise((res, rej) => res(mockAnswer));
+        return fetch('/api/data').then(resp => resp.json());
     }
 }

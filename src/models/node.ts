@@ -26,7 +26,7 @@ export function FilterTree<DATA>(nodes: Node<DATA>[], predicate: Predicate) {
 export class Node<DATA> {
     public readonly id: number;
     public title: string;
-    @observable public collapsed: boolean;
+    //@observable public collapsed: boolean;
     @observable public hidden: boolean = false;
     public readonly data: DATA;
     public readonly childs?: Node<DATA>[];
@@ -35,7 +35,7 @@ export class Node<DATA> {
         this.parent = parent;
         this.id = oldid || (++id);
         this.title = title;
-        this.collapsed = false;
+        //this.collapsed = false;
         this.childs = childs;
         this.data = data;
     }
