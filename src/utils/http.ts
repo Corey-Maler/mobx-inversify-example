@@ -21,6 +21,55 @@ const mockAnswer =  [
     },
     {
         title: 'a2'
+    },
+    {
+        title: 'some name',
+        childs: [
+            {
+                title: 'planets',
+                childs: [
+                    {
+                        title: 'Naboo'
+                    },
+                    {
+                        title: 'Tatooine'
+                    },
+                    {
+                        title: 'Hoth'
+                    },
+                    {
+                        title: 'Alderaan'
+                    }
+                ]
+            },
+            {
+                title: 'heroes',
+                childs: [
+                    { title: 'Boba Fett'},
+                    { title: 'Padmé Amidala'},
+                    { title: 'BB-8'},
+                    { title: 'C-3PO' },
+                    { title: 'Chewbacca'}
+                ]
+            }
+        ]
+    }, {
+        title: 'section',
+        childs: [{
+            title: 'subsection',
+            childs: [{
+                title: 'star wars',
+                childs: [{
+                    title: 'vehicles',
+                    childs: [
+                        { title: 'Millennium Falcon'},
+                        { title: 'Slave 1'},
+                        { title: 'Snowspeeder'},
+                        { title: 'X-Wing starfighter'}
+                    ]
+                }]
+            }]
+        }]
     }
 ];
 
