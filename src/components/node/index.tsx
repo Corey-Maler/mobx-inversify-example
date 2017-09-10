@@ -1,16 +1,21 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
+@observer
 export class Node extends React.Component<{}, {}> {
     public render() {
-        return <div><div style={{display: 'flex'}}>
-            <div style={{flex: '1 1 auto'}}>{this.props.val.title}</div>
-            <div style={{maxWidth: '100px', minWidth: '100px'}}>43</div>
+        return (
+        <div>
+            <div className="row">
+                <div className="title">{this.props.node.title} <button onClick={() => this.props.node.collapsed = !this.props.node.collapsed}>show/hide</button></div>
+                <div className="desc">43</div>
+            </div>
+            <div className="childs">
+            {
+                (!this.props.node.collapsed) && this.props.node.childs && this.props.node.childs.map((a) => <Node key={a.id} node={a}></Node>)
+            }
+            </div>
         </div>
-        {
-            this.props.val.childs && this.props.val.childs.map((a) => (
-                <div style={{marginLeft: '20px'}}><Node val={a}></Node></div>)
-            )
-        }
-        </div>
+        );
     }
 }
