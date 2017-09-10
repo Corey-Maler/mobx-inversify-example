@@ -3,69 +3,74 @@ import { provideSingleton } from '../ioc';
 const mockAnswer =  [
     {
         title: 'a1',
+        address: 123123,
+        symboltype: 'data',
         childs: [
             {
-                title: 'a1.1'
+                title: 'a1.1',
+                symboltype: 'data',
+                address: 123123,
             },
             {
                 title: 'a1.2',
+                symboltype: 'data',
+                address: 123123,
                 childs: [
                     {
-                        title: 'a1.2.1'
+                        title: 'a1.2.1',
+                        symboltype: 'data',
+                        address: 123123,
                     }, {
-                        title: 'a1.2.2'
+                        title: 'a1.2.2',
+                        symboltype: 'data',
+                        address: 123123,
                     }
                 ]
             }
         ]
     },
     {
-        title: 'a2'
+        title: 'a2',
+        symboltype: 'data',
+        address: 123123,
     },
     {
         title: 'some name',
+        symboltype: 'data',
+        address: 123123,
         childs: [
             {
                 title: 'planets',
-                childs: [
-                    {
-                        title: 'Naboo'
-                    },
-                    {
-                        title: 'Tatooine'
-                    },
-                    {
-                        title: 'Hoth'
-                    },
-                    {
-                        title: 'Alderaan'
-                    }
-                ]
+                symboltype: 'data',
+                address: 123123,
             },
             {
                 title: 'heroes',
-                childs: [
-                    { title: 'Boba Fett'},
-                    { title: 'Padmé Amidala'},
-                    { title: 'BB-8'},
-                    { title: 'C-3PO' },
-                    { title: 'Chewbacca'}
-                ]
+                symboltype: 'data',
+                address: 123123,
             }
         ]
     }, {
         title: 'section',
+        symboltype: 'data',
+        address: 123123,
         childs: [{
             title: 'subsection',
+            symboltype: 'data',
+            address: 123123,
             childs: [{
                 title: 'star wars',
+                symboltype: 'data',
+                address: 123123,
                 childs: [{
                     title: 'vehicles',
+                    symboltype: 'data',
+                    address: 123123,
                     childs: [
-                        { title: 'Millennium Falcon'},
-                        { title: 'Slave 1'},
-                        { title: 'Snowspeeder'},
-                        { title: 'X-Wing starfighter'}
+                        { title: 'Millennium Falcon',symboltype: 'data', address: 123123,},
+                        { title: 'Slave 1', symboltype: 'data',address: 123123,},
+                        { title: 'Snowspeeder', symboltype: 'data',address: 123123,},
+                        { title: 'X-Wing starfighter',symboltype: 'data', address: 123123,}
                     ]
                 }]
             }]

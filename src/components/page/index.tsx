@@ -9,6 +9,10 @@ import { Header } from '../header';
 import { ElfService } from '../../service/elf.service';
 import { ElfState } from '../../state/elf.state';
 
+import { SectionNode } from '../SectionNode';
+import { SymbolNode } from '../SymbolNode'
+
+
 @observer
 export class Page extends React.PureComponent<{}, {}> {
     @inject(ElfService) private elfService: ElfService;
@@ -24,8 +28,8 @@ export class Page extends React.PureComponent<{}, {}> {
         return (<div className="page">
             <Header />
             <div className="workspace">
-                <Panel tree={state.sections} title="Sections" filter={state.ui.sectionFilter} changeFilter={this.elfService.changeSectionFilter}/>
-                <Panel tree={state.symbols} title="Symbols" filter={state.ui.symbolFilter} changeFilter={this.elfService.changeSymbolFilter} />
+                <Panel node={SectionNode} tree={state.sections} title="Sections" filter={state.ui.sectionFilter} changeFilter={this.elfService.changeSectionFilter}/>
+                <Panel node={SymbolNode} tree={state.symbols} title="Symbols" filter={state.ui.symbolFilter} changeFilter={this.elfService.changeSymbolFilter} />
             </div>
         </div>);
     }

@@ -8,15 +8,15 @@ import { ElfService } from '../../service/elf.service';
 import { ElfState } from '../../state/elf.state';
 
 // components
-import { TreeNode } from '../node';
 import { Node } from '../../models/node';
 
-interface TableProps {
-    tree: Node[] | 'LOADING';
+interface TableProps<DATA> {
+    tree: Node<DATA>[] | 'LOADING';
+    node: ({node}: {node: Node<DATA>}) => JSX.Element;
 }
 
 @observer
-export class Tree extends React.Component<TableProps, {}> {
+export class Tree<DATA> extends React.Component<TableProps<DATA>, {}> {
     public render() {
         if (this.props.tree === 'LOADING' ) {
             return (
@@ -26,7 +26,7 @@ export class Tree extends React.Component<TableProps, {}> {
         }
 
         return (<div className="table">
-            {this.props.tree.map(t => <TreeNode key={t.id} node={t} />)}
+            {this.props.tree.map(t => <this.props.node key={t.id} node={t} />)}
         </div>);
     }
 }

@@ -3,6 +3,8 @@ import { observable } from 'mobx';
 import { provideSingleton } from '../ioc';
 
 import { Node } from '../models/node';
+import { Section } from '../models/section';
+import { ISymbol } from '../models/symbol';
 
 export class ElfUI {
     @observable sectionFilter: string = '';
@@ -12,7 +14,7 @@ export class ElfUI {
 @provideSingleton(ElfState)
 export class ElfState {
     @observable public filename: string = 'LOADING';
-    @observable public sections: Node[] | 'LOADING' = 'LOADING';
-    @observable public symbols: Node[] | 'LOADING' = 'LOADING';
+    @observable public sections: Node<Section>[] | 'LOADING' = 'LOADING';
+    @observable public symbols: Node<ISymbol>[] | 'LOADING' = 'LOADING';
     public readonly ui: ElfUI = new ElfUI();
 }

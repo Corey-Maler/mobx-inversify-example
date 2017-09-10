@@ -7,13 +7,14 @@ import { HTTP } from '../utils/http';
 import { Node } from '../models/node';
 import { ElfState } from '../state/elf.state';
 
+
 const parseData = (raw: any) => {
     let childs = undefined;
     if (raw.childs) {
         childs = raw.childs.map(parseData);
     }
 
-    return new Node(raw.title, {}, childs);
+    return new Node(raw.title, raw, childs);
 }
 
 @provideSingleton(ElfService)
