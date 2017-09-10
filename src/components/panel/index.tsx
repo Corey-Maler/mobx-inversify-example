@@ -17,20 +17,22 @@ interface PanelProps<DATA> {
 
 @observer
 export class Panel<DATA> extends React.Component<PanelProps<DATA>, {}> {
+
+    private get filteredTree() {
+        const { filter, tree } = this.props;
+        if (tree === 'LOADING') {
+            return tree;
+        }
+        
+        if (filter === '') {
+            return tree;
+        } else {
+            return FilterTree(tree, node => node.title.toLowerCase().includes(filter));
+        }
+    }
+
     public render() {
         const { changeFilter, filter, tree, title } = this.props;
-
-        const filteredTree = tree === 'LOADING' ? 'LOADING' : (filter === '' ? tree : FilterTree(tree, (node) => {
-            return node.title.toLowerCase().includes(filter);
-        })) as Node<DATA>[];
-
-        let limitedTree: Node<DATA>[] | 'LOADING' = 'LOADING';
-        let limited = false;
-        if  (filteredTree !== 'LOADING') {
-            const limits = LimitTree(filteredTree);
-            limitedTree = limits.data;
-            limited = limits.limited;
-        }
 
         return (<div className="panel">
             <div className="table-head">
@@ -39,7 +41,7 @@ export class Panel<DATA> extends React.Component<PanelProps<DATA>, {}> {
                 <div className="table-title">{title}</div>
             </div>
             
-            <Tree node={this.props.node} tree={limitedTree} limited={limited}/>
+            <Tree node={this.props.node} tree={this.filteredTree}/>
         </div>)
     }
 }

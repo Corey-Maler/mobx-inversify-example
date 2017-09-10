@@ -29,14 +29,6 @@ const parseSymbolData = (raw: any, key: string) => {
     }
     
     return new Node('section', raw, undefined);
-    /*
-    let childs = undefined;
-    if (raw.childs) {
-        childs = raw.childs.map(parseData);
-    }
-
-    return new Node(raw.name, raw, childs);
-    */
 }
 
 @provideSingleton(ElfService)
@@ -45,7 +37,7 @@ export class ElfService {
     @inject(ElfState) public elfState: ElfState;
 
     @action.bound public async fetch() {
-        const rawFull = <any>(await this.http.Get('/elf'));
+        const rawFull = <any>(await this.http.GET('/elf'));
         const raw = rawFull.sections;
         const keys = Object.keys(raw);
         this.elfState.filename = rawFull.file;
@@ -64,11 +56,10 @@ export class ElfService {
     }
 
     @action.bound public highlightSection(section: string) {
-        this.elfState.ui.selectedSection = section;
+        this.elfState.ui.highlightedSection = section;
     }
 
     @action.bound public setFilterBySection(section: string) {
-        console.log('>>', section);
         this.elfState.ui.filterBySection = section;
     }
 }

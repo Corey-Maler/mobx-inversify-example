@@ -14,7 +14,7 @@ export const SectionNode = (observer(({node}: {node: Node<Section>}) => {
     const service = AppContainer.get(ElfService);
     return (
         <div>
-            <div className="row" data-highlight={node.data.name === state.ui.selectedSection} onClick={() => service.setFilterBySection(node.data.name)}>
+            <div className="row" data-highlight={node.data.name === state.ui.highlightedSection} onClick={() => service.setFilterBySection(node.data.name)}>
                 <div className="title">{node.title} {node.childs && <span className="label">scope</span>}</div>
                 <div className="desc">{node.data.address}</div>
                 <div className="desc">{node.data.size}</div>
@@ -22,4 +22,4 @@ export const SectionNode = (observer(({node}: {node: Node<Section>}) => {
             </div>
         </div>
         );
-}) as any) as ({node}: {node: Node<Section>}) => JSX.Element;
+}) as any) as ({node}: {node: Node<Section>}) => JSX.Element; // strange bug in mobx-react defenitions

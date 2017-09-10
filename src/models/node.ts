@@ -12,9 +12,11 @@ type Predicate<DATA> = (n: Node<DATA>) => boolean;
 
 function checkSelfOrChild<DATA>(node: Node<DATA>, predicate: Predicate<DATA>) {
     let childs = [];
+
     if (node.childs) {
         childs = node.childs.map(n => checkSelfOrChild(n, predicate)).filter(n => n !== undefined);
     }
+    
     const self = predicate(node);
 
     if (self || childs.length > 0) {
@@ -41,8 +43,7 @@ function limitSelfOrChild<DATA>(node: Node<DATA>, _iteration: Iter) {
 }
 
 export function FilterTree<DATA>(nodes: Node<DATA>[], predicate: Predicate<DATA>) {
-    const res = nodes.map(n => checkSelfOrChild(n, predicate)).filter(t => t !== undefined);
-    return res;
+    return nodes.map(n => checkSelfOrChild(n, predicate)).filter(t => t !== undefined);
 }
 
 export function LimitTree<DATA>(nodes: Node<DATA>[]) {
@@ -53,17 +54,15 @@ export function LimitTree<DATA>(nodes: Node<DATA>[]) {
 
 export class Node<DATA> {
     public readonly id: number;
-    public title: string;
-    //@observable public collapsed: boolean;
-    @observable public hidden: boolean = false;
+    public readonly title: string;
     public readonly data: DATA;
     public readonly childs?: Node<DATA>[];
     public readonly parent: Node<DATA> | undefined;
+
     constructor(title, data: DATA, childs: Node<DATA>[] | undefined, oldid?: number, parent?: Node<DATA>) {
         this.parent = parent;
         this.id = oldid || (++id);
         this.title = title;
-        //this.collapsed = false;
         this.childs = childs;
         this.data = data;
     }

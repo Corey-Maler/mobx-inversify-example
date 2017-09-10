@@ -15,11 +15,13 @@ export const SymbolNode = observer(({node}: {node: Node<ISymbol>}) => {
                 <div className="desc">{node.data.memType}</div>
                 <div className="desc">{node.data.symboltype}</div>
             </div>
-            <div className="childs">
-            {
-                node.childs && node.childs.map((a) => <SymbolNode key={a.id} node={a}></SymbolNode>)
-            }
-            </div>
+            { node.childs && (
+                <div className="childs">
+                {
+                    node.childs.map((a) => <SymbolNode key={a.id} node={a}></SymbolNode>)
+                }
+                </div>
+            )}
         </div>
         );
 });
