@@ -16,7 +16,7 @@ function checkSelfOrChild<DATA>(node: Node<DATA>, predicate: Predicate<DATA>) {
     if (node.childs) {
         childs = node.childs.map(n => checkSelfOrChild(n, predicate)).filter(n => n !== undefined);
     }
-    
+
     const self = predicate(node);
 
     if (self || childs.length > 0) {
@@ -66,4 +66,33 @@ export class Node<DATA> {
         this.childs = childs;
         this.data = data;
     }
+}
+
+export class FlatNode<DATA> {
+    public readonly id: number;
+    public readonly title: string;
+    public readonly data: DATA;
+    public readonly parent: FlatNode<DATA> | undefined;
+    public readonly original: Node<DATA>;
+    public readonly marginLeft: number;
+    constructor(original: Node<DATA>, marginLeft: number, parent: FlatNode<DATA> | undefined) {
+        this.original = original;
+        this.id = original.id;
+        this.title = original.title;
+        this.data = original.data;
+        this.marginLeft = marginLeft;
+        this.parent = parent;
+    }
+}
+
+export function Flatenize<DATA>(original: Node<DATA>[], marginLeft: number = 0, parent?: FlatNode<DATA>): FlatNode<DATA>[] {
+    const res: FlatNode<DATA>[] = [];
+    original.map(o => {
+        const node = new FlatNode<DATA>(o, marginLeft, parent);
+        res.push(node);
+        if (o.childs) {
+            res.push(...Flatenize(o.childs, marginLeft + 1, node));
+        }
+    });
+    return res;
 }

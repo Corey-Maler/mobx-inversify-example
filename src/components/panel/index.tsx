@@ -4,14 +4,14 @@ import { observer } from 'mobx-react';
 import { Tree } from '../tree';
 import { TreeFilter } from '../filter';
 
-import { Node, FilterTree, LimitTree } from '../../models/node';
+import { FlatNode, Node, FilterTree, LimitTree } from '../../models/node';
 
 interface PanelProps<DATA> {
     tree: Node<DATA>[] | 'LOADING';
     title: string;
     filter: string;
     changeFilter: (filter: string) => void;
-    node: ({node}: {node: Node<DATA>}) => JSX.Element;
+    node: ({node}: {node: FlatNode<DATA>}) => JSX.Element;
     additionalFilter?: JSX.Element;
 }
 
@@ -20,6 +20,7 @@ export class Panel<DATA> extends React.Component<PanelProps<DATA>, {}> {
 
     private get filteredTree() {
         const { filter, tree } = this.props;
+        const filterString = filter.toLowerCase();
         if (tree === 'LOADING') {
             return tree;
         }
@@ -27,7 +28,7 @@ export class Panel<DATA> extends React.Component<PanelProps<DATA>, {}> {
         if (filter === '') {
             return tree;
         } else {
-            return FilterTree(tree, node => node.title.toLowerCase().includes(filter));
+            return FilterTree(tree, node => node.title.toLowerCase().includes(filterString));
         }
     }
 

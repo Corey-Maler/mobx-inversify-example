@@ -4,11 +4,11 @@ import { observer } from 'mobx-react';
 import { inject, provideSingleton } from '../../ioc';
 
 // components
-import { Node, LimitTree } from '../../models/node';
+import { Node, FlatNode, Flatenize, LimitTree } from '../../models/node';
 
 interface TableProps<DATA> {
     tree: Node<DATA>[] | 'LOADING';
-    node: ({node}: {node: Node<DATA>}) => JSX.Element;
+    node: ({node}: {node: FlatNode<DATA>}) => JSX.Element;
 }
 
 @observer
@@ -23,14 +23,15 @@ export class Tree<DATA> extends React.Component<TableProps<DATA>, {}> {
                 </div>);
         }
         
-        const limits = LimitTree(tree);
-        const limitedTree = limits.data;
-        const isTreeLimited = limits.limited;
+        //const limits = LimitTree(tree);
+        //const limitedTree = limits.data;
+        //const isTreeLimited = limits.limited;
+
+        const flatTree = Flatenize(tree).slice(0, 100);
 
         return (
             <div className="table">
-                {tree.map(node => <NodeView key={node.id} node={node} />)}
-                {isTreeLimited && <div className="limitation">Too much data to display. Try to filter by section or name.</div>}
+                {flatTree.map(node => <NodeView key={node.id} node={node} />)}
             </div>
         );
     }
