@@ -41,13 +41,7 @@ export class Tree<DATA> extends React.Component<TableProps<DATA>, {}> {
                 </div>);
         }
 
-        //const limits = LimitTree(tree);
-        //const limitedTree = limits.data;
-        //const isTreeLimited = limits.limited;
-
         const flatTree = this.flatTree;
-        // Flatenize(tree).slice(0, 100);
-        /*   {flatTree.map(node => <NodeView key={node.id} node={node} />)} */
 
         return (
             <div className="table">

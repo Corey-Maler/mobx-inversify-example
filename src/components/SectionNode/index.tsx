@@ -10,7 +10,7 @@ import { ElfService } from '../../service/elf.service';
 
 import { TreeNodeElement } from '../tree';
 
-// node: ({node}: {node: Node<DATA>}) => JSX.Element;
+
 export const SectionNode = (observer(({node, style}) => {
     const state = AppContainer.get(ElfState);
     const service = AppContainer.get(ElfService);
@@ -19,7 +19,7 @@ export const SectionNode = (observer(({node, style}) => {
                 <div className="title">{node.title}</div>
                 <div className="desc">{node.data.address}</div>
                 <div className="desc">{node.data.size}</div>
-                <div className="desc">{node.data.memType}</div>
+                <div className="mem-label" data-type={node.data.memType}>{node.data.memType}</div>
             </div>
         );
 }) as any) as TreeNodeElement<Section>; // strange bug in mobx-react defenitions

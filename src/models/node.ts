@@ -85,14 +85,14 @@ export class FlatNode<DATA> {
     }
 }
 
-export function Flatenize<DATA>(original: Node<DATA>[], marginLeft: number = 0, parent?: FlatNode<DATA>): FlatNode<DATA>[] {
-    const res: FlatNode<DATA>[] = [];
-    original.map(o => {
-        const node = new FlatNode<DATA>(o, marginLeft, parent);
-        res.push(node);
-        if (o.childs) {
-            res.push(...Flatenize(o.childs, marginLeft + 1, node));
+export function Flatenize<DATA>(originalTree: Node<DATA>[], marginLeft: number = 0, parent?: FlatNode<DATA>): FlatNode<DATA>[] {
+    const result: FlatNode<DATA>[] = [];
+    originalTree.map(origin => {
+        const node = new FlatNode<DATA>(origin, marginLeft, parent);
+        result.push(node);
+        if (origin.childs) {
+            result.push(...Flatenize(origin.childs, marginLeft + 1, node));
         }
     });
-    return res;
+    return result;
 }
