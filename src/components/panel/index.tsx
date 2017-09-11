@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 
-import { Tree } from '../tree';
+import { Tree, TreeNodeElement } from '../tree';
 import { TreeFilter } from '../filter';
 
 import { FlatNode, Node, FilterTree, LimitTree } from '../../models/node';
@@ -11,7 +11,7 @@ interface PanelProps<DATA> {
     title: string;
     filter: string;
     changeFilter: (filter: string) => void;
-    node: ({node}: {node: FlatNode<DATA>}) => JSX.Element;
+    node: TreeNodeElement<DATA>;
     additionalFilter?: JSX.Element;
 }
 
